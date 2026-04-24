@@ -22,3 +22,39 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# --- Build Artifacts ---
+# Ignore the Maven build directory
+target/
+
+# --- IDE Settings ---
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# --- macOS System Files ---
+# Ignore system-generated files like .DS_Store
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# macOS metadata and temporary folders
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
