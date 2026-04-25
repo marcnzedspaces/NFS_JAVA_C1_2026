@@ -26,6 +26,7 @@ replay_pid*
 # --- Build Artifacts ---
 # Ignore the Maven build directory
 target/
+config/
 
 # --- IDE Settings ---
 # IntelliJ IDEA
