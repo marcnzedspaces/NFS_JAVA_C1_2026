@@ -38,10 +38,14 @@ public class SecurityConfig {
             .userDetailsService(customUserDetailsService)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/health", "/api/auth/**", "/error").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/courses/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/courses/**").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/api/courses/**").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/api/courses/**").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/courses/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v2/courses/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/reports/**").permitAll()
+
+                .requestMatchers(HttpMethod.POST, "/api/v1/courses/**").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/courses/**").authenticated()
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
