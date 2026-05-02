@@ -27,7 +27,7 @@ replay_pid*
 # Ignore the Maven build directory
 target/
 config/application-local.properties
-resources/application-local.properties
+src/main/resources/application-local.properties
 
 # --- IDE Settings ---
 # IntelliJ IDEA
