@@ -26,7 +26,8 @@ replay_pid*
 # --- Build Artifacts ---
 # Ignore the Maven build directory
 target/
-config/
+config/application-local.properties
+resources/application-local.properties
 
 # --- IDE Settings ---
 # IntelliJ IDEA
@@ -45,6 +46,7 @@ config/
 .LSOverride
 Icon
 ._*
+.java-version
 
 # macOS metadata and temporary folders
 .DocumentRevisions-V100
@@ -59,3 +61,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+mvnw
+mvnw.cmd
