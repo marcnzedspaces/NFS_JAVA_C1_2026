@@ -1,0 +1,120 @@
+```markdown
+# Course Management API
+
+## Overview
+
+This API provides endpoints for managing courses. It supports basic CRUD operations, search functionality, and a report endpoint for retrieving courses by category.
+
+## Endpoints
+
+### Authentication Endpoints
+
+#### `POST /api/auth/register`
+
+Registers a new user.
+
+#### `POST /api/auth/login`
+
+Logs in a user and returns an authentication token.
+
+### Course Endpoints
+
+#### `GET /api/v1/courses`
+
+Returns a list of all courses.
+
+#### `GET /api/v1/courses/{id}`
+
+Returns the details of a specific course.
+
+#### `POST /api/v1/courses`
+
+Creates a new course.
+
+Request Body:
+
+```json
+{
+  "title": "Java Fundamentals",
+  "category": "Programming",
+  "duration": 10,
+  "published": true
+}
+```
+
+#### `PUT /api/v1/courses/{id}`
+
+Updates an existing course.
+
+Request Body:
+
+```json
+{
+  "title": "Java Fundamentals",
+  "category": "Programming",
+  "duration": 10,
+  "published": true
+}
+```
+
+#### `DELETE /api/v1/courses/{id}`
+
+Deletes an existing course.
+
+#### `GET /api/v1/courses/search?keyword=java`
+
+Searches for courses by keyword.
+
+#### `GET /api/v1/courses/paged?page=0&size=5`
+
+Retrieves a paginated list of courses.
+
+#### `GET /api/v1/reports/courses/by-category`
+
+Retrieves a report of courses grouped by category.
+
+Response:
+
+```json
+[
+  {
+    "category": "Programming",
+    "totalCourses": 5
+  },
+  {
+    "category": "Database",
+    "totalCourses": 2
+  }
+]
+```
+
+### Security Rules
+
+- GET course endpoints are public.
+- POST and PUT course endpoints require login.
+- DELETE course endpoint requires ADMIN role.
+- Report endpoint is public.
+
+## Error Handling
+
+This API follows the following error handling conventions:
+
+- **400 Bad Request**: Returned when the request is malformed or contains invalid data.
+- **401 Unauthorized**: Returned when the request lacks valid authentication credentials.
+- **403 Forbidden**: Returned when the authenticated user is not authorized to perform the requested action.
+- **404 Not Found**: Returned when a requested resource cannot be found.
+- **500 Internal Server Error**: Returned when an unexpected error occurs on the server.
+
+## Authentication
+
+This API supports basic authentication for registering and logging in users. The following authentication methods are supported:
+
+- **Basic Authentication**: Use the following credentials to authenticate:
+  - Username: [provide username here]
+  - Password: [provide password here]
+
+## Contact
+
+For any questions or issues, please contact [provide contact information here].
+```
+
