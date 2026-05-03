@@ -1,3 +1,4 @@
+/*
 import "./App.css";
 
 function App() {
@@ -45,17 +46,17 @@ function App() {
 }
 
 export default App;
-
-/*
-import { useEffect, useState } from 'react';
-import './App.css'
-import CourseList from './components/CourseList.jsx';
-import CourseDetail from './components/CourseDetail.jsx';
-import { getCourse } from './services/courseService';
+*/
+import { useEffect, useState } from "react";
+import "./App.css";
+import CourseList from "./components/CourseList";
+import CourseDetail from "./components/CourseDetail";
+import { getCourses } from "./services/courseService";
 
 function App() {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -63,41 +64,62 @@ function App() {
     async function loadCourses() {
       try {
         setLoading(true);
-        const data = await getCourse();
+        const data = await getCourses();
         setCourses(data);
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     }
+
     loadCourses();
   }, []);
+
+  const filteredCourses = courses.filter((course) =>
+    course.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="page">
       <header className="header">
-        <h1>Course Catalog</h1>
-        <p>Data is loaded from the SoringBoot backend</p>
+        <h1>Course Frontend</h1>
+        <p>Data is loaded from the Spring Boot backend.</p>
       </header>
 
       {loading && <p className="message">Loading courses...</p>}
-      
+
       {error && <p className="error">Error: {error}</p>}
 
       {!loading && !error && (
         <>
-          <p className="summary">Total courses: {courses.length}</p>
+          <div className="toolbar">
+            <input
+              type="text"
+              placeholder="Search courses by title..."
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+
+            <button onClick={() => setSearchTerm("")}>Clear</button>
+          </div>
+
+          <p className="summary">
+            Showing {filteredCourses.length} of {courses.length} courses
+          </p>
 
           <div className="layout">
-            <CourseList courses={courses} onSelectCourse={setSelectedCourse} />
+            <CourseList
+              courses={filteredCourses}
+              onSelectCourse={setSelectedCourse}
+            />
+
             <CourseDetail course={selectedCourse} />
           </div>
         </>
       )}
     </div>
-  )
+  );
 }
 
-export default App
-*/
+export default App;
