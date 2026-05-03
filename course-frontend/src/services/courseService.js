@@ -9,3 +9,13 @@ export async function getCourses() {
     
     return response.json();
 }
+
+export async function searchCourses(keyword) {
+    const response = await fetch(`${API_BASE_URL}/courses/search?keyword=${encodeURIComponent(keyword)}`);
+    
+    if (!response.ok) {
+        throw new Error(`Failed to search courses: ${response.statusText}`);
+    }
+    
+    return response.json();
+}
