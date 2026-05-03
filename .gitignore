@@ -89,3 +89,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+mvnw
+mvnw.cmd
