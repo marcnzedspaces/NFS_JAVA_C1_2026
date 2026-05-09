@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -17,7 +18,17 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/courses" element={<CoursesPage />} />
           <Route path="/courses/:id" element={<CourseDetailPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+
+          <Route 
+          path="dashboard" 
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
