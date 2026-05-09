@@ -1,8 +1,11 @@
+import { useParams } from "react-router-dom";
 function CourseDetailPage(){
+    const { id } = useParams();
+
     return ( 
         <section>
             <h1>Course Detail Page</h1>
-            <p>This page will display ONE selected course</p>
+            <p>Course ID from URL: {id}</p>
         </section>
     );
 }
