@@ -1,10 +1,76 @@
-function LoginPage(){
-    return ( 
-        <section>
-            <h1>Login Page</h1>
-            <p>This page will allow users to login</p>
-        </section>
-    );
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authApi";
+
+function LoginPage() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("admin@admin.com");
+  const [password, setPassword] = useState("pwd12345");
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleLogin(event) {
+    event.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const data = await loginUser(email, password);
+
+      console.log("Login response:", data);
+
+      localStorage.setItem("token", data.token);
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      setError("Login failed. Please check your email and password.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section className="login-page">
+      <h1>Login</h1>
+
+      <p>
+        Login to access the protected dashboard. For this demo, protected means
+        the user has a valid token.
+      </p>
+
+      {error && <p className="error-message">{error}</p>}
+
+      <form className="form" onSubmit={handleLogin}>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Enter email"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Enter password"
+          />
+        </div>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+    </section>
+  );
 }
 
 export default LoginPage;
