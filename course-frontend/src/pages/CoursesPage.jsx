@@ -7,6 +7,9 @@ function CoursesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const role = localStorage.getItem("role");
+  const isAdmin = role === "ADMIN";
+
   useEffect(() => {
     async function loadCourses() {
       try {
@@ -32,43 +35,53 @@ function CoursesPage() {
   }
 
   return (
-    <section>
-      <div className="page-header">
-        <div>
-          <h1>Courses</h1>
-          <p>These courses are loaded from Spring Boot and MongoDB.</p>
+      <section>
+        <div className="page-header">
+          <div>
+            <h1>Courses</h1>
+            <p>These courses are loaded from Spring Boot and MongoDB.</p>
+          </div>
+
+          {isAdmin && (
+              <Link to="/courses/create">
+                <button>Create Course</button>
+              </Link>
+          )}
         </div>
-      </div>
 
-      {courses.length === 0 ? (
-        <p>No courses found.</p>
-      ) : (
-        <div className="card-grid">
-          {courses.map((course) => (
-            <div className="card" key={course.id}>
-              <h2>{course.title}</h2>
+        {courses.length === 0 ? (
+            <p>No courses found.</p>
+        ) : (
+            <div className="card-grid">
+              {courses.map((course) => (
+                  <div className="card" key={course.id}>
+                    <h2>{course.title}</h2>
 
-              <p>
-                <strong>Category:</strong> {course.category}
-              </p>
+                    <p>
+                      <strong>Category:</strong> {course.category}
+                    </p>
 
-              <p>
-                <strong>Duration:</strong> {course.duration} hours
-              </p>
+                    <p>
+                      <strong>Duration:</strong> {course.duration} hours
+                    </p>
 
-              <p>
-                <strong>Status:</strong>{" "}
-                {course.published ? "Published" : "Draft"}
-              </p>
+                    <p>
+                      <strong>Status:</strong>{" "}
+                      {course.published ? "Published" : "Draft"}
+                    </p>
 
-              <div className="card-actions">
-                <Link to={`/courses/${course.id}`}>View Details</Link>
-              </div>
+                    <div className="card-actions">
+                      <Link to={`/courses/${course.id}`}>View Details</Link>
+
+                      {isAdmin && (
+                          <Link to={`/courses/${course.id}/edit`}>Edit</Link>
+                      )}
+                    </div>
+                  </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
-    </section>
+        )}
+      </section>
   );
 }
 

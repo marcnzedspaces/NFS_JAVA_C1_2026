@@ -32,3 +32,42 @@ export async function getCourseById(id) {
 
   return response.json();
 }
+
+export async function createCourse(courseData) {
+  const response = await fetch(COURSE_API_URL, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(courseData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create course");
+  }
+
+  return response.json();
+}
+
+export async function updateCourse(id, courseData) {
+  const response = await fetch(`${COURSE_API_URL}/${id}`, {
+    method: "PUT",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(courseData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update course");
+  }
+
+  return response.json();
+}
+
+export async function deleteCourse(id) {
+  const response = await fetch(`${COURSE_API_URL}/${id}`, {
+    method: "DELETE",
+    headers: getAuthHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete course");
+  }
+}

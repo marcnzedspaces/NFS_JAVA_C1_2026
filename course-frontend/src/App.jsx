@@ -7,32 +7,54 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetailPage from "./pages/CourseDetailPage";
+import CourseCreatePage from "./pages/CourseCreatePage";
+import CourseEditPage from "./pages/CourseEditPage";
 import DashboardPage from "./pages/DashboardPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  return (
-      <Routes>
-        <Route path="/" element={<MainLayout />} >
-          <Route index element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/courses" element={<CoursesPage />} />
-          <Route path="/courses/:id" element={<CourseDetailPage />} />
+    return (
+        <Routes>
+            <Route path="/" element={<MainLayout />}>
+                <Route index element={<HomePage />} />
 
-          <Route 
-          path="dashboard" 
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            } 
-          />
-          
-          
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-  );
+                <Route path="/login" element={<LoginPage />} />
+
+                <Route path="/courses" element={<CoursesPage />} />
+
+                <Route path="/courses/:id" element={<CourseDetailPage />} />
+
+                <Route
+                    path="/courses/create"
+                    element={
+                        <ProtectedRoute adminOnly={true}>
+                            <CourseCreatePage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/courses/:id/edit"
+                    element={
+                        <ProtectedRoute adminOnly={true}>
+                            <CourseEditPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <DashboardPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route path="*" element={<NotFoundPage />} />
+            </Route>
+        </Routes>
+    );
 }
 
 export default App;

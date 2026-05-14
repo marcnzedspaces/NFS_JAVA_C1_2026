@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 function Navbar(){
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
-    
+
     function handleLogout() {
         localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
+
         navigate("/login");
     }
     
@@ -20,9 +23,8 @@ function Navbar(){
                 {token ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
-                    <Link to="/login">Logout</Link>
+                    <Link to="/login">Login</Link>
                 )}
-                <Link to="/login">Login</Link>
             </div>
         </nav>
     );

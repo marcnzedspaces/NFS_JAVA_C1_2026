@@ -23,6 +23,8 @@ function LoginPage() {
       console.log("Login response:", data);
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("role", data.role);
 
       navigate("/dashboard");
     } catch (error) {
