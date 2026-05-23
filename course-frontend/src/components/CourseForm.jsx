@@ -66,8 +66,9 @@ function CourseForm({ initialData, onSubmit, buttonText }) {
     return (
         <form className="form" onSubmit={handleSubmit}>
             <div className="form-group">
-                <label>Course Title</label>
+                <label htmlFor="title">Course Title</label>
                 <input
+                    id="title"
                     name="title"
                     type="text"
                     value={formData.title}
@@ -78,8 +79,9 @@ function CourseForm({ initialData, onSubmit, buttonText }) {
             </div>
 
             <div className="form-group">
-                <label>Category</label>
+                <label htmlFor="category">Category</label>
                 <input
+                    id="category"
                     name="category"
                     type="text"
                     value={formData.category}
@@ -90,8 +92,9 @@ function CourseForm({ initialData, onSubmit, buttonText }) {
             </div>
 
             <div className="form-group">
-                <label>Duration</label>
+                <label htmlFor="duration">Duration</label>
                 <input
+                    id="duration"
                     name="duration"
                     type="number"
                     value={formData.duration}
