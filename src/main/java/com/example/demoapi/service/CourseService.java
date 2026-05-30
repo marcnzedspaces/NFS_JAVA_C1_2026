@@ -13,6 +13,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ * Service interface for managing courses.
+ */
 @Service
 public class CourseService {
 
@@ -141,16 +144,29 @@ public class CourseService {
         return result;
     }
 
+    /**
+     * Retrieves a page of courses by category and published status.
+     *
+     * @param category the category of courses to retrieve
+     * @param published whether to retrieve only published courses
+     * @param pageable the pagination information
+     * @return a page of courses
+     */
     public Page<Course> getPagedCoursesByCategoryAndPublished(String category, boolean published, Pageable pageable) {
-        log.info("Fetching paged courses by category='{}' and published='{}': page={}, size={}, sort={}", 
-                category,
-                published,
-                pageable.getPageNumber(), 
-                pageable.getPageSize(), 
-                pageable.getSort());
+    log.info("Fetching paged courses by category='{}' and published='{}': page={}, size={}, sort={}", 
+            category,
+            published,
+            pageable.getPageNumber(), 
+            pageable.getPageSize(), 
+            pageable.getSort());
 
+    try {
         Page<Course> result = courseRepository.findByCategoryAndPublished(category, published, pageable);
         log.info("Returned {} matching courses", result.getNumberOfElements());
         return result;
+    } catch (Exception e) {
+        log.error("Error fetching paged courses by category='{}' and published='{}'", category, published, e);
+        throw new RuntimeException("Error fetching paged courses by category and published status", e);
     }
+}
 }
