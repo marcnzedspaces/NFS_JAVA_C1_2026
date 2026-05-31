@@ -3,7 +3,6 @@ package com.example.demoapi.exception;
 import java.time.LocalDateTime;
 
 public class ApiErrorResponse {
-
     private LocalDateTime timestamp;
     private int status;
     private String error;
