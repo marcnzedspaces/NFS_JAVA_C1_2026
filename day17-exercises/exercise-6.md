@@ -1,4 +1,4 @@
-# Exercise 7 — Security Hardening Checklist
+# Exercise 6 — Security Hardening Checklist
 
 ## Objective
 
