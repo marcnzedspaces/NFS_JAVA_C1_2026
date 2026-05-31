@@ -42,4 +42,18 @@ public class ObservabilityDemoController {
 
         throw new RuntimeException("Demo failure for observability practice");
     }
+
+    @GetMapping("/fail-runtime")
+    public Map<String, Object> failRuntime() {
+        logger.warn("Runtime fail endpoint called. ");
+
+        throw new RuntimeException("Demo failure for observability practice");
+    }
+
+    @GetMapping("/fail-general")
+    public Map<String, Object> failGeneral() {
+        logger.warn("General fail endpoint called. Throwing demo exception.");
+
+        throw new RuntimeException("Demo failure for errror handling practice");
+    }
 }
