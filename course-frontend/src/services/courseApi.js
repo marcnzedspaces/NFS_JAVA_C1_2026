@@ -1,4 +1,5 @@
-const COURSE_API_URL = "http://localhost:8080/api/v1/courses";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/v1";
+const COURSE_API_URL = `${API_BASE_URL}/api/v1/courses`;
 
 function getAuthHeaders() {
   const token = localStorage.getItem("token");
