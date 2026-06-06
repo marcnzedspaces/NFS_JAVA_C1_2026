@@ -1,16 +1,48 @@
 services:
   mongo:
-    image: mongo:7
+    image: mongo:8
     container_name: nfs-java-c1-mongo
     restart: unless-stopped
     ports:
-      - 27017:27017
+      - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=pwd12345
-      - MONGO_INITDB_DATABASE=newdb
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: pwd12345
+      MONGO_INITDB_DATABASE: newdb
     volumes:
       - mongo_data:/data/db
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nfs-java-c1-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_USERNAME: admin
+      MONGO_PASSWORD: pwd12345
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+      MONGO_DATABASE: newdb
+      MONGO_AUTH_DATABASE: admin
+      JWT_SECRET: 8d2d28cf03ef5625c97996d2014f5a9060897d6fd6c70581c36a1d7126a94d53
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./course-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8080
+    container_name: nfs-java-c1-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
 
 volumes:
   mongo_data:
