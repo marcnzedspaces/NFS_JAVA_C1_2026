@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Java Fundamentals",
+    "category": "Backend",
+    "duration": 5,
+    "published": true
+  },
+  {
+    "title": "Spring Boot REST API",
+    "category": "Backend",
+    "duration": 4,
+    "published": true
+  },
+  {
+    "title": "MongoDB Data Modelling",
+    "category": "Database",
+    "duration": 3,
+    "published": true
+  },
+  {
+    "title": "React Components and State",
+    "category": "Frontend",
+    "duration": 4,
+    "published": true
+  },
+  {
+    "title": "JWT Authentication",
+    "category": "Security",
+    "duration": 3,
+    "published": true
+  },
+  {
+    "title": "Frontend Testing with Playwright",
+    "category": "Testing",
+    "duration": 2,
+    "published": false
+  }
+]
