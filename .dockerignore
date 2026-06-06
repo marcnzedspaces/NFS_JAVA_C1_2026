@@ -1,0 +1,7 @@
+.git
+.gitignore
+target
+course-frontend/node_modules
+course-frontend/dist
+course-frontend/.env
+.DS_Store
